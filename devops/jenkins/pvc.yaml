@@ -1,0 +1,12 @@
+kind: PersistentVolumeClaim
+apiVersion: v1
+metadata:
+  name: jenkins-pvc
+  namespace: devops
+spec:
+  storageClassName: devops-jenkins
+  accessModes:
+    - ReadWriteMany
+  resources:
+    requests:
+      storage: 2Gi

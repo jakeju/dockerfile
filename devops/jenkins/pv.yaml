@@ -1,0 +1,20 @@
+apiVersion: v1
+kind: PersistentVolume
+metadata:
+  name: devops-pv
+  namespace: devops
+spec:
+  capacity:
+    storage: 2Gi
+  volumeMode: Filesystem
+  accessModes:
+    - ReadWriteMany
+    #- ReadWriteOnce
+  persistentVolumeReclaimPolicy: Retain
+  storageClassName: devops-jenkins
+  mountOptions:
+    - hard
+    - nfsvers=4.1
+  nfs:
+    path: /app/nfs/share/devops/jenkins
+    server: k8s-n1
