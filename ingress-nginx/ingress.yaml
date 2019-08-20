@@ -1,14 +1,16 @@
 apiVersion: networking.k8s.io/v1beta1
 kind: Ingress
 metadata:
-  name: test-ingress
+  name: jenkins-ingress
+  namespace: devops
   annotations:
-    nginx.ingress.kubernetes.io/rewrite-target: /
+    kubernetes.io/ingress.class: "nginx"     
 spec:
   rules:
-  - http:
+  - host: jenkins.xianyu.com
+    http:
       paths:
-      - path: /testpath
+      - path: /jenkins
         backend:
-          serviceName: test
-          servicePort: 80
+          serviceName: jenkins
+          servicePort: 8080
