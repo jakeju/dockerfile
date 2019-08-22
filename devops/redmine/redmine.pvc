@@ -1,0 +1,14 @@
+apiVersion: v1
+kind: PersistentVolumeClaim
+metadata:
+  name: redmine-pvc
+  namespace: devops
+  labels:
+    app: redmine-pvc
+spec:
+  accessModes:
+  - ReadWriteMany
+  storageClassName: redmine-data
+  resources:
+    requests:
+      storage: 1Gi

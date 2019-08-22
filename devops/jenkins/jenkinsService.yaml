@@ -57,11 +57,11 @@ spec:
           name: jenkins-home
         resources:
           limits:
-            cpu: 500m
-            memory: 1500Mi
+            cpu: 200m
+            memory: 500Mi
           requests:
-            cpu: 500m
-            memory: 1500Mi
+            cpu: 200m
+            memory: 500Mi
       volumes:
       - name: jenkins-home
         persistentVolumeClaim:

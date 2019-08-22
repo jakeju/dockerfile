@@ -1,0 +1,16 @@
+apiVersion: extensions/v1beta1
+kind: Ingress
+metadata:
+  name: redmine-ingress
+  namespace: devops
+  labels: 
+    app: redmine
+spec:
+  rules:
+  - host: redmine.xianyu.com
+    http:
+      paths:
+      - path: /
+        backend:
+          serviceName: redmine-service
+          servicePort: 3000

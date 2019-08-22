@@ -1,0 +1,79 @@
+apiVersion: v1
+kind: Service
+metadata:
+  labels:
+    devops-service: redmine
+    app: redmine
+  name: redmine-service
+  namespace: devops
+spec:
+  selector:
+    app: redmine-app
+  ports:
+    - port: 3000
+      targetPort: 3000
+      name: http-redmine
+
+---
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: redmine-deploy
+  namespace: devops
+  labels:
+    app: redmine-deploy
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: redmine-app
+  template:
+    metadata:
+      labels:
+        app: redmine-app
+    spec:
+      containers:
+        - name: redmine-app
+          image: redmine:4.0.4
+          imagePullPolicy: IfNotPresent
+          env:
+            - name: REDMINE_DB_MYSQL
+              value: 127.0.0.1
+            - name: REDMINE_DB_USERNAME
+              value: root
+            - name: REDMINE_DB_PASSWORD
+              value: asb#1234
+            - name: REDMINE_DB_DATABASE
+              value: redmine
+          ports:
+            - containerPort: 3000
+              protocol: TCP
+          resources:
+            requests:
+              cpu: 200m
+              memory: 500Mi
+            limits:
+              cpu: 200m
+              memory: 500Mi
+        - name: redmine-mariadb
+          image: mariadb:10.4.7
+          env:
+            - name: MYSQL_DATABASE
+              value: redmine
+            - name: MYSQL_ROOT_PASSWORD
+              value: asb#1234
+          ports:
+            - containerPort: 3306
+              name: redminedb-port
+          volumeMounts:
+            - name: db-storage
+              mountPath: /var/lib/mysql
+          livenessProbe:
+            tcpSocket:
+              port: 3306
+            initialDelaySeconds: 30
+            timeoutSeconds: 1
+      volumes:
+        - name: db-storage
+          persistentVolumeClaim:
+            claimName: redmine-pvc
