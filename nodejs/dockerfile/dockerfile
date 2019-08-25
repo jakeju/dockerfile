@@ -1,0 +1,13 @@
+FROM node:10.16.3-alpine
+MAINTAINER jakeju@hotmail.com
+ENV HOME=/home
+VOLUME ["/nodejs"]
+WORKDIR /nodejs/
+RUN npm install -g @angular/cli \
+    && npm install -g ionic cordova
+
+RUN ionic start myProfile tabs \
+    && cd myProfile 
+
+CMD ["ionic serve"]
+
