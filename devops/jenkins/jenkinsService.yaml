@@ -49,7 +49,7 @@ spec:
         - containerPort: 50000
         env:
         - name: JAVA_OPTS
-          value: '-Xmx1400m'
+          value: '-Xmx1800m'
         - name: JENKINS_OPTS
           value: '--prefix=/jenkins'
         volumeMounts:
@@ -58,10 +58,10 @@ spec:
         resources:
           limits:
             cpu: 200m
-            memory: 500Mi
+            memory: 2000Mi
           requests:
             cpu: 200m
-            memory: 500Mi
+            memory: 1000Mi
       volumes:
       - name: jenkins-home
         persistentVolumeClaim:
