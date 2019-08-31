@@ -34,7 +34,7 @@ spec:
     spec:
       containers:
         - name: redmine-app
-          image: redmine:4.0.4
+          image: myredemine:4.0.4
           imagePullPolicy: IfNotPresent
           env:
             - name: REDMINE_DB_MYSQL
@@ -45,6 +45,8 @@ spec:
               value: asb#1234
             - name: REDMINE_DB_DATABASE
               value: redmine
+            - name: RAILS_RELATIVE_URL_ROOT
+              value: "/redmine"
           ports:
             - containerPort: 3000
               protocol: TCP

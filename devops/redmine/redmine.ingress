@@ -7,10 +7,10 @@ metadata:
     app: redmine
 spec:
   rules:
-  - host: redmine.xianyu.com
+  - host: xianyu.com
     http:
       paths:
-      - path: /
+      - path: /redmine
         backend:
           serviceName: redmine-service
           servicePort: 3000

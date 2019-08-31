@@ -1,0 +1,2 @@
+FROM redmine:4.0.4
+COPY  config.ru /usr/src/redmine/config.ru

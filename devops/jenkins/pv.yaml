@@ -5,7 +5,7 @@ metadata:
   namespace: devops
 spec:
   capacity:
-    storage: 2Gi
+    storage: 12Gi
   volumeMode: Filesystem
   accessModes:
     - ReadWriteMany
